@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InfoViewController: UIViewController {
+final class InfoViewController: UIViewController {
 
     private let lowerDownButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 100, y: 400, width: 200, height: 50))
