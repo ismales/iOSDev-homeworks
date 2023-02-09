@@ -22,7 +22,7 @@ final class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        view.backgroundColor = .lightGray
         title = textForLabel.title
 
         let navBarButton = UIBarButtonItem(title: "Инфо", style: .plain, target: self, action: #selector(tapAction))
