@@ -9,9 +9,9 @@ import UIKit
 
 final class FeedViewController: UIViewController {
 
-    private let postButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 65, width: 450, height: 400))
-        button.setTitle("НОВОСТЬ", for: .normal)
+    private lazy var postButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: getStatusBarHeight(), width: UIScreen.main.bounds.width, height: 400))
+        button.setTitle("Контент", for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(.blue, for: .normal)
         return button
@@ -19,8 +19,9 @@ final class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .lightGray
+        title = "Лента"
         setupPostButton()
-        view.backgroundColor = .gray
     }
 
     private func setupPostButton() {
