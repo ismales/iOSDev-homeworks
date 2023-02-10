@@ -12,7 +12,8 @@ class ProfileHeaderView: UIView {
     private var statusText = ""
 
     private var profileImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 16, y: 16, width: 110, height: 110))
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "profileImage.png")
         image.layer.cornerRadius = 55
         image.layer.borderWidth = 4
@@ -22,7 +23,8 @@ class ProfileHeaderView: UIView {
     }()
 
     private var profileUserName: UILabel = {
-        let name = UILabel(frame: CGRect(x: 150, y: 27, width: 150, height: 18))
+        let name = UILabel()
+        name.translatesAutoresizingMaskIntoConstraints = false
         name.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         name.textColor = .black
         name.text = "Creator"
@@ -30,7 +32,8 @@ class ProfileHeaderView: UIView {
     }()
 
     private var profileUserStatus: UILabel = {
-        let status = UILabel(frame: CGRect(x: 150, y: 94, width: 200, height: 14))
+        let status = UILabel()
+        status.translatesAutoresizingMaskIntoConstraints = false
         status.font = UIFont.systemFont(ofSize: 14)
         status.text = "4udo, gde ti..."
         status.textColor = .gray
@@ -38,7 +41,8 @@ class ProfileHeaderView: UIView {
     }()
 
     private lazy var profileNewStatusField: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 150, y: 124, width: UIScreen.main.bounds.width - 166, height: 50))
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
         textField.placeholder = "Введите текст"
         textField.font = UIFont.systemFont(ofSize: 15)
@@ -50,7 +54,8 @@ class ProfileHeaderView: UIView {
     }()
 
     private var profileStatusChangeButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 16, y: 190, width: UIScreen.main.bounds.width - 32, height: 50))
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Установить статус", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
@@ -65,12 +70,10 @@ class ProfileHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(profileImage)
-        addSubview(profileUserName)
-        addSubview(profileUserStatus)
-        addSubview(profileNewStatusField)
-        addSubview(profileStatusChangeButton)
+        translatesAutoresizingMaskIntoConstraints = false
+
         pressButton()
+        layout()
     }
 
     required init?(coder: NSCoder) {
@@ -79,6 +82,40 @@ class ProfileHeaderView: UIView {
 
     private func pressButton() {
         profileStatusChangeButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    }
+
+    private func layout() {
+        addSubview(profileImage)
+        addSubview(profileUserName)
+        addSubview(profileUserStatus)
+        addSubview(profileNewStatusField)
+        addSubview(profileStatusChangeButton)
+
+        NSLayoutConstraint.activate([
+            profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            profileImage.heightAnchor.constraint(equalToConstant: 110),
+            profileImage.widthAnchor.constraint(equalToConstant: 110),
+
+            profileUserName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            profileUserName.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
+            profileUserName.heightAnchor.constraint(equalToConstant: 18),
+            profileUserName.widthAnchor.constraint(equalToConstant: profileUserName.intrinsicContentSize.width),
+
+            profileUserStatus.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80),
+            profileUserStatus.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
+            profileUserStatus.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+
+            profileNewStatusField.topAnchor.constraint(equalTo: profileUserStatus.topAnchor, constant: 20),
+            profileNewStatusField.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
+            profileNewStatusField.heightAnchor.constraint(equalToConstant: 40),
+            profileNewStatusField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+
+            profileStatusChangeButton.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 30),
+            profileStatusChangeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            profileStatusChangeButton.heightAnchor.constraint(equalToConstant: 50),
+            profileStatusChangeButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 32)
+        ])
     }
 
     @objc private func statusTextChanged(_ textField: UITextField) {
