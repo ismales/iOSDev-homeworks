@@ -10,11 +10,12 @@ import UIKit
 final class InfoViewController: UIViewController {
 
     private let lowerDownButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 100, y: 400, width: 200, height: 50))
-        button.setTitle("Уходим?!", for: .normal)
-        button.backgroundColor = .black
-        return button
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setTitle("Уходим?!", for: .normal)
+        $0.backgroundColor = .black
+        $0.layer.cornerRadius = 4
+        return $0
+    }(UIButton())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,14 @@ final class InfoViewController: UIViewController {
 
     private func setupButton() {
         view.addSubview(lowerDownButton)
+
+        NSLayoutConstraint.activate([
+            lowerDownButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            lowerDownButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
+            lowerDownButton.heightAnchor.constraint(equalToConstant: 50),
+            lowerDownButton.widthAnchor.constraint(equalToConstant: 200)
+        ])
+
         lowerDownButton.addTarget(self, action: #selector(lowerDown), for: .touchUpInside)
     }
 
