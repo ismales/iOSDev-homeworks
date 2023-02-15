@@ -10,12 +10,13 @@ import UIKit
 final class InfoViewController: UIViewController {
 
     private let lowerDownButton: UIButton = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setTitle("Уходим?!", for: .normal)
-        $0.backgroundColor = .black
-        $0.layer.cornerRadius = 4
-        return $0
-    }(UIButton())
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Уходим?!", for: .normal)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 4
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()

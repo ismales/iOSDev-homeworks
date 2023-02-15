@@ -12,18 +12,19 @@ final class ProfileViewController: UIViewController {
     private var profileHeaderView = ProfileHeaderView()
 
     private var button: UIButton = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setTitle("(Временая кнопка)", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        $0.setTitleColor(.white, for: .normal)
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("(Временая кнопка)", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.setTitleColor(.white, for: .normal)
 
-        $0.backgroundColor = .blue
-        $0.layer.cornerRadius = 4
-        $0.layer.shadowOffset = CGSize(width: 4, height: 4)
-        $0.layer.shadowOpacity = 0.7
-        $0.layer.shadowColor = UIColor.black.cgColor
-        return $0
-    }(UIButton())
+        button.backgroundColor = .blue
+        button.layer.cornerRadius = 4
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowColor = UIColor.black.cgColor
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -11,6 +11,7 @@ class ProfileHeaderView: UIView {
 
     private var statusText = ""
 
+    // MARK: - Image
     private var profileImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -22,6 +23,7 @@ class ProfileHeaderView: UIView {
         return image
     }()
 
+    // MARK: - Label
     private var profileUserName: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -40,6 +42,7 @@ class ProfileHeaderView: UIView {
         return status
     }()
 
+    // MARK: - TextField
     private lazy var profileNewStatusField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -53,6 +56,7 @@ class ProfileHeaderView: UIView {
         return textField
     }()
 
+    // MARK: - Button
     private var profileStatusChangeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -83,6 +87,8 @@ class ProfileHeaderView: UIView {
     private func pressButton() {
         profileStatusChangeButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
+
+    // MARK: - Layot
 
     private func layout() {
         addSubview(profileImage)
@@ -117,6 +123,8 @@ class ProfileHeaderView: UIView {
             profileStatusChangeButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 32)
         ])
     }
+
+    // MARK: - @objc
 
     @objc private func statusTextChanged(_ textField: UITextField) {
         statusText = profileNewStatusField.text!

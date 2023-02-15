@@ -9,25 +9,30 @@ import UIKit
 
 final class TabBarViewController: UITabBarController {
 
-    private let feedVC = FeedViewController()
-    private let profileVC = ProfileViewController()
+    private let feedVC = UINavigationController(rootViewController: FeedViewController())
+    private let profileVC = UINavigationController(rootViewController: LoginViewController())
+    private let loginVC = LoginViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupConrollers()
     }
 
     private func setupConrollers() {
         tabBar.backgroundColor = .white
 
-        let feedNavigationController = UINavigationController(rootViewController: feedVC)
+        profileVC.navigationBar.isHidden = true
+
         feedVC.tabBarItem.title = "Лента"
         feedVC.tabBarItem.image = UIImage(systemName: "newspaper")
 
-        let profileNavigationController = UINavigationController(rootViewController: profileVC)
         profileVC.tabBarItem.title = "Профиль"
         profileVC.tabBarItem.image = UIImage(systemName: "person")
 
-        viewControllers = [feedNavigationController, profileNavigationController]
+        viewControllers = [feedVC, profileVC]
+    }
+
+    private func changeVC() {
     }
 }

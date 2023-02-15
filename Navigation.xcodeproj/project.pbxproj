@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		AD5341382993990800443833 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5341372993990800443833 /* ProfileHeaderView.swift */; };
+		AD534160299BA9B400443833 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD53415F299BA9B400443833 /* Color.swift */; };
+		AD534162299BAAC000443833 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD534161299BAAC000443833 /* LoginViewController.swift */; };
+		AD534164299C030900443833 /* CustomCellTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD534163299C030900443833 /* CustomCellTableView.swift */; };
+		AD534168299C278000443833 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD534167299C278000443833 /* LoginView.swift */; };
 		AD6ABFA1298AB0FF003C89A9 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6ABFA0298AB0FF003C89A9 /* FeedViewController.swift */; };
 		AD6ABFA3298AB2F4003C89A9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6ABFA2298AB2F4003C89A9 /* TabBarViewController.swift */; };
 		AD6ABFA7298AC065003C89A9 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6ABFA6298AC065003C89A9 /* PostViewController.swift */; };
@@ -20,6 +24,10 @@
 
 /* Begin PBXFileReference section */
 		AD5341372993990800443833 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		AD53415F299BA9B400443833 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		AD534161299BAAC000443833 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AD534163299C030900443833 /* CustomCellTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellTableView.swift; sourceTree = "<group>"; };
+		AD534167299C278000443833 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AD6ABFA0298AB0FF003C89A9 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		AD6ABFA2298AB2F4003C89A9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		AD6ABFA6298AC065003C89A9 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +60,24 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		AD53413A299780CB00443833 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				ADE7B8FA298A804B0083EF7A /* Assets.xcassets */,
+				ADE7B8FC298A804B0083EF7A /* LaunchScreen.storyboard */,
+				ADE7B8FF298A804B0083EF7A /* Info.plist */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		AD53415E299BA95200443833 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AD53415F299BA9B400443833 /* Color.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		AD6ABFA8298AC0BD003C89A9 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +91,9 @@
 		AD6ABFA9298AC0D4003C89A9 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				AD534161299BAAC000443833 /* LoginViewController.swift */,
+				AD534167299C278000443833 /* LoginView.swift */,
+				AD534163299C030900443833 /* CustomCellTableView.swift */,
 				ADE7B8F5298A80490083EF7A /* ProfileViewController.swift */,
 				AD5341372993990800443833 /* ProfileHeaderView.swift */,
 			);
@@ -93,9 +122,8 @@
 				AD5341392993E08500443833 /* Application */,
 				AD6ABFA8298AC0BD003C89A9 /* Feed */,
 				AD6ABFA9298AC0D4003C89A9 /* Profile */,
-				ADE7B8FA298A804B0083EF7A /* Assets.xcassets */,
-				ADE7B8FC298A804B0083EF7A /* LaunchScreen.storyboard */,
-				ADE7B8FF298A804B0083EF7A /* Info.plist */,
+				AD53415E299BA95200443833 /* Extensions */,
+				AD53413A299780CB00443833 /* Supporting files */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -170,11 +198,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD534164299C030900443833 /* CustomCellTableView.swift in Sources */,
+				AD534162299BAAC000443833 /* LoginViewController.swift in Sources */,
 				AD6ABFA7298AC065003C89A9 /* PostViewController.swift in Sources */,
 				ADE7B8F6298A80490083EF7A /* ProfileViewController.swift in Sources */,
 				AD6ABFA1298AB0FF003C89A9 /* FeedViewController.swift in Sources */,
 				AD6ABFA3298AB2F4003C89A9 /* TabBarViewController.swift in Sources */,
 				AD5341382993990800443833 /* ProfileHeaderView.swift in Sources */,
+				AD534160299BA9B400443833 /* Color.swift in Sources */,
+				AD534168299C278000443833 /* LoginView.swift in Sources */,
 				AD6ABFAB298B8210003C89A9 /* InfoViewController.swift in Sources */,
 				ADE7B8F2298A80490083EF7A /* AppDelegate.swift in Sources */,
 			);
@@ -316,11 +348,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_FILE = "Navigation/Supporting files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -345,11 +377,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_FILE = "Navigation/Supporting files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
