@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD3DAEBA299E243E00348808 /* ProfilePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3DAEB9299E243D00348808 /* ProfilePost.swift */; };
+		AD3DAEBC299E2A0000348808 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3DAEBB299E2A0000348808 /* PostTableViewCell.swift */; };
+		AD3DAEBE299E2A9900348808 /* UIView +ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3DAEBD299E2A9900348808 /* UIView +ext.swift */; };
 		AD5341382993990800443833 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5341372993990800443833 /* ProfileHeaderView.swift */; };
-		AD534160299BA9B400443833 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD53415F299BA9B400443833 /* Color.swift */; };
+		AD534160299BA9B400443833 /* Color +ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD53415F299BA9B400443833 /* Color +ext.swift */; };
 		AD534162299BAAC000443833 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD534161299BAAC000443833 /* LoginViewController.swift */; };
 		AD6ABFA1298AB0FF003C89A9 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6ABFA0298AB0FF003C89A9 /* FeedViewController.swift */; };
 		AD6ABFA3298AB2F4003C89A9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6ABFA2298AB2F4003C89A9 /* TabBarViewController.swift */; };
@@ -21,8 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD3DAEB9299E243D00348808 /* ProfilePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePost.swift; sourceTree = "<group>"; };
+		AD3DAEBB299E2A0000348808 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		AD3DAEBD299E2A9900348808 /* UIView +ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView +ext.swift"; sourceTree = "<group>"; };
 		AD5341372993990800443833 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
-		AD53415F299BA9B400443833 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		AD53415F299BA9B400443833 /* Color +ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color +ext.swift"; sourceTree = "<group>"; };
 		AD534161299BAAC000443833 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AD6ABFA0298AB0FF003C89A9 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		AD6ABFA2298AB2F4003C89A9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +75,8 @@
 		AD53415E299BA95200443833 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				AD53415F299BA9B400443833 /* Color.swift */,
+				AD53415F299BA9B400443833 /* Color +ext.swift */,
+				AD3DAEBD299E2A9900348808 /* UIView +ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -90,6 +97,8 @@
 				AD534161299BAAC000443833 /* LoginViewController.swift */,
 				ADE7B8F5298A80490083EF7A /* ProfileViewController.swift */,
 				AD5341372993990800443833 /* ProfileHeaderView.swift */,
+				AD3DAEB9299E243D00348808 /* ProfilePost.swift */,
+				AD3DAEBB299E2A0000348808 /* PostTableViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -192,14 +201,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD3DAEBC299E2A0000348808 /* PostTableViewCell.swift in Sources */,
 				AD534162299BAAC000443833 /* LoginViewController.swift in Sources */,
 				AD6ABFA7298AC065003C89A9 /* PostViewController.swift in Sources */,
 				ADE7B8F6298A80490083EF7A /* ProfileViewController.swift in Sources */,
 				AD6ABFA1298AB0FF003C89A9 /* FeedViewController.swift in Sources */,
 				AD6ABFA3298AB2F4003C89A9 /* TabBarViewController.swift in Sources */,
+				AD3DAEBA299E243E00348808 /* ProfilePost.swift in Sources */,
 				AD5341382993990800443833 /* ProfileHeaderView.swift in Sources */,
-				AD534160299BA9B400443833 /* Color.swift in Sources */,
+				AD534160299BA9B400443833 /* Color +ext.swift in Sources */,
 				AD6ABFAB298B8210003C89A9 /* InfoViewController.swift in Sources */,
+				AD3DAEBE299E2A9900348808 /* UIView +ext.swift in Sources */,
 				ADE7B8F2298A80490083EF7A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

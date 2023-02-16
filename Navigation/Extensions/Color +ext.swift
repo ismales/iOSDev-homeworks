@@ -1,5 +1,5 @@
 //
-//  Color.swift
+//  Color +ext.swift
 //  Navigation
 //
 //  Created by Сманчос on 14.02.2023.

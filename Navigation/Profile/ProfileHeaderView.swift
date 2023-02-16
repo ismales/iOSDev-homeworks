@@ -11,6 +11,13 @@ class ProfileHeaderView: UIView {
 
     private var statusText = ""
 
+    private let headerContentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     // MARK: - Image
     private var profileImage: UIImageView = {
         let image = UIImageView()
@@ -91,34 +98,39 @@ class ProfileHeaderView: UIView {
     // MARK: - Layot
 
     private func layout() {
-        addSubview(profileImage)
-        addSubview(profileUserName)
-        addSubview(profileUserStatus)
-        addSubview(profileNewStatusField)
-        addSubview(profileStatusChangeButton)
+        addSubview(headerContentView)
+        [profileImage, profileUserName, profileUserStatus, profileNewStatusField, profileStatusChangeButton].forEach { headerContentView.addSubview($0) }
 
         NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            headerContentView.topAnchor.constraint(equalTo: topAnchor),
+            headerContentView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            headerContentView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            headerContentView.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            profileImage.topAnchor.constraint(equalTo: headerContentView.topAnchor, constant: 16),
+            profileImage.leadingAnchor.constraint(equalTo: headerContentView.leadingAnchor, constant: 16),
             profileImage.heightAnchor.constraint(equalToConstant: 110),
             profileImage.widthAnchor.constraint(equalToConstant: 110),
 
-            profileUserName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            profileUserName.topAnchor.constraint(equalTo: headerContentView.topAnchor, constant: 27),
             profileUserName.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
             profileUserName.heightAnchor.constraint(equalToConstant: 18),
             profileUserName.widthAnchor.constraint(equalToConstant: profileUserName.intrinsicContentSize.width),
 
-            profileUserStatus.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80),
+            profileUserStatus.topAnchor.constraint(equalTo: headerContentView.topAnchor, constant: 80),
             profileUserStatus.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
-            profileUserStatus.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            profileUserStatus.trailingAnchor.constraint(equalTo: headerContentView.trailingAnchor, constant: -16),
+            profileUserStatus.heightAnchor.constraint(equalToConstant: 14),
 
             profileNewStatusField.topAnchor.constraint(equalTo: profileUserStatus.topAnchor, constant: 20),
             profileNewStatusField.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
             profileNewStatusField.heightAnchor.constraint(equalToConstant: 40),
-            profileNewStatusField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            profileNewStatusField.trailingAnchor.constraint(equalTo: headerContentView.trailingAnchor, constant: -16),
 
             profileStatusChangeButton.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 30),
-            profileStatusChangeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            profileStatusChangeButton.leadingAnchor.constraint(equalTo: headerContentView.leadingAnchor, constant: 16),
+            profileStatusChangeButton.trailingAnchor.constraint(equalTo: headerContentView.trailingAnchor, constant: -16),
+            profileStatusChangeButton.bottomAnchor.constraint(equalTo: headerContentView.bottomAnchor, constant: -16),
             profileStatusChangeButton.heightAnchor.constraint(equalToConstant: 50),
             profileStatusChangeButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 32)
         ])
