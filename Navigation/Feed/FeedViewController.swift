@@ -10,26 +10,29 @@ import UIKit
 final class FeedViewController: UIViewController {
 
     private let stackView: UIStackView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.axis = .vertical
-        $0.distribution = .fillEqually
-        $0.spacing = 10
-        return $0
-    }(UIStackView())
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        return stackView
+    }()
 
     private lazy var postButton1: UIButton = {
-        $0.setTitle("Контент", for: .normal)
-        $0.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        $0.setTitleColor(.blue, for: .normal)
-        return $0
-    }(UIButton())
+        let button = UIButton()
+        button.setTitle("Контент", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        button.setTitleColor(.blue, for: .normal)
+        return button
+    }()
 
     private lazy var postButton2: UIButton = {
-        $0.setTitle("Контент", for: .normal)
-        $0.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        $0.setTitleColor(.blue, for: .normal)
-        return $0
-    }(UIButton())
+        let button = UIButton()
+        button.setTitle("Контент", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        button.setTitleColor(.blue, for: .normal)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
