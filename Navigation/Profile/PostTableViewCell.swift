@@ -9,6 +9,7 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
+    // MARK: - Propertie's
     private let cellContentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -58,6 +59,7 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
 
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -68,6 +70,7 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Method's
     override func prepareForReuse() {
         super.prepareForReuse()
 
@@ -78,7 +81,7 @@ class PostTableViewCell: UITableViewCell {
         ppViews.text = ""
     }
 
-    func setupCell(post: ProfilePost) {
+    func setupCell(post: ProfilePosts) {
         ppAuthorLabel.text = post.author
         ppImageView.image = post.image
         ppDescriptionLabel.text = post.description

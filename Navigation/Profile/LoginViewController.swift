@@ -10,6 +10,8 @@ import UIKit
 final class LoginViewController: UIViewController {
     
     private let notification = NotificationCenter.default
+
+    // MARK: - Propertie's
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -39,7 +41,6 @@ final class LoginViewController: UIViewController {
         stackView.layer.borderColor = UIColor.lightGray.cgColor
         stackView.layer.cornerRadius = 10
         stackView.axis = .vertical
-        //        stackView.distribution = .fillEqually
         return stackView
     }()
     
@@ -108,7 +109,8 @@ final class LoginViewController: UIViewController {
         notification.removeObserver(UIResponder.keyboardWillShowNotification)
         notification.removeObserver(UIResponder.keyboardWillHideNotification)
     }
-    
+
+    // MARK: - Method's
     private func setupViews() {
         view.backgroundColor = .white
         view.addSubview(scrollView)
@@ -145,7 +147,7 @@ final class LoginViewController: UIViewController {
             stackView.heightAnchor.constraint(equalToConstant: 100),
             
             loginField.topAnchor.constraint(equalTo: stackView.topAnchor),
-            loginField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 10),
+            loginField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 14),
             loginField.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             loginField.bottomAnchor.constraint(equalTo: separatorView.topAnchor),
             loginField.heightAnchor.constraint(equalToConstant: 50),
@@ -156,7 +158,7 @@ final class LoginViewController: UIViewController {
             separatorView.heightAnchor.constraint(equalToConstant: 0.5),
             
             passwordField.topAnchor.constraint(equalTo: separatorView.bottomAnchor),
-            passwordField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 10),
+            passwordField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 14),
             passwordField.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             passwordField.heightAnchor.constraint(equalToConstant: 50),
             passwordField.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
@@ -182,6 +184,8 @@ final class LoginViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
 }
+
+// MARK: - Extension's
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
