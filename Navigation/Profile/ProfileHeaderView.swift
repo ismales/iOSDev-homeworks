@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
 
+    // MARK: - Propertie's
     private var statusText = ""
 
     private let headerContentView: UIView = {
@@ -18,7 +19,6 @@ class ProfileHeaderView: UIView {
         return view
     }()
 
-    // MARK: - Image
     private var profileImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +30,6 @@ class ProfileHeaderView: UIView {
         return image
     }()
 
-    // MARK: - Label
     private var profileUserName: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +48,6 @@ class ProfileHeaderView: UIView {
         return status
     }()
 
-    // MARK: - TextField
     private lazy var profileNewStatusField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +61,6 @@ class ProfileHeaderView: UIView {
         return textField
     }()
 
-    // MARK: - Button
     private var profileStatusChangeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +76,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
 
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
@@ -91,12 +89,12 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Method's
     private func pressButton() {
         profileStatusChangeButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
 
     // MARK: - Layot
-
     private func layout() {
         addSubview(headerContentView)
         [profileImage, profileUserName, profileUserStatus, profileNewStatusField, profileStatusChangeButton].forEach { headerContentView.addSubview($0) }
@@ -137,7 +135,6 @@ class ProfileHeaderView: UIView {
     }
 
     // MARK: - @objc
-
     @objc private func statusTextChanged(_ textField: UITextField) {
         statusText = profileNewStatusField.text!
     }
