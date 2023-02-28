@@ -10,7 +10,6 @@ import UIKit
 final class ProfileViewController: UIViewController {
 
     // MARK: - Propertie's
-
     private let profilePosts: [ProfilePosts] = ProfilePosts.createMockPofilePost()
 
     private lazy var tableView: UITableView = {
@@ -47,7 +46,6 @@ final class ProfileViewController: UIViewController {
 }
 
 // MARK: - Extencion's
-
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         2
@@ -77,6 +75,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ProfileHeaderView()
+        header.imageTapGesture()
         return header
     }
 
@@ -93,5 +92,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         guard indexPath == IndexPath(row: 0, section: 0) else { return }
         let photosVC = PhotosViewController()
         navigationController?.pushViewController(photosVC, animated: true)
+    }
+}
+
+extension ProfileViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
+    }
+
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
     }
 }

@@ -101,8 +101,6 @@ class PhotosTableViewCell: UITableViewCell {
         [image1, image2, image3, image4].forEach { stackView.addArrangedSubview($0) }
         cellContentView.addSubview(goOverImage)
 
-        let offset: CGFloat = 12
-
         NSLayoutConstraint.activate([
             cellContentView.topAnchor.constraint(equalTo: contentView.topAnchor),
             cellContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -110,21 +108,27 @@ class PhotosTableViewCell: UITableViewCell {
             cellContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             cellContentView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 
-            label.topAnchor.constraint(equalTo: cellContentView.topAnchor, constant: offset),
-            label.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: offset),
-            label.heightAnchor.constraint(equalToConstant: 24),
+            label.topAnchor.constraint(equalTo: cellContentView.topAnchor, constant: Metric.offset),
+            label.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: Metric.offset),
+            label.heightAnchor.constraint(equalToConstant: label.font.pointSize),
             label.widthAnchor.constraint(equalToConstant: label.intrinsicContentSize.width),
 
-            stackView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: offset),
-            stackView.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: offset),
-            stackView.bottomAnchor.constraint(equalTo: cellContentView.bottomAnchor, constant: -offset),
-            stackView.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -offset),
-            stackView.widthAnchor.constraint(equalToConstant: contentView.bounds.width - offset * 2),
-            stackView.heightAnchor.constraint(equalToConstant: (contentView.bounds.width - offset * 2) / 4),
+            stackView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: Metric.offset),
+            stackView.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: Metric.offset),
+            stackView.bottomAnchor.constraint(equalTo: cellContentView.bottomAnchor, constant: -Metric.offset),
+            stackView.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -Metric.offset),
+            stackView.widthAnchor.constraint(equalToConstant: contentView.bounds.width - Metric.offset * 2),
+            stackView.heightAnchor.constraint(equalToConstant: (contentView.bounds.width - Metric.offset * 2) / 4),
 
             goOverImage.centerYAnchor.constraint(equalTo: label.centerYAnchor),
-            goOverImage.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -offset)
+            goOverImage.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -Metric.offset)
         ])
     }
 }
 
+extension PhotosTableViewCell {
+
+    enum Metric {
+        static let offset: CGFloat = 12
+    }
+}
