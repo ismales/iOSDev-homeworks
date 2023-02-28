@@ -12,7 +12,6 @@ final class LoginViewController: UIViewController {
     private let notification = NotificationCenter.default
 
     // MARK: - Propertie's
-    
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false

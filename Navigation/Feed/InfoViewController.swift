@@ -24,10 +24,6 @@ final class InfoViewController: UIViewController {
         setupButton()
     }
 
-    deinit {
-        
-    }
-
     private func setupButton() {
         view.addSubview(lowerDownButton)
 
