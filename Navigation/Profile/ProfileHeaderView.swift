@@ -91,7 +91,7 @@ class ProfileHeaderView: UIView {
         return view
     }()
 
-    let closeButton: UIButton = { //for animate
+    private lazy var closeButton: UIButton = { //for animate
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
