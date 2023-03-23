@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PhotosCollectionViewCellDelegate: AnyObject {
+    func imageTapped(_ image: UIImage?, frameImage: CGRect, indexPath: IndexPath)
+}
+
 final class PhotosCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Propertie's
@@ -15,12 +19,19 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
+        image.isUserInteractionEnabled = true
         return image
     }()
+
+    private var indexPathCell = IndexPath()
+
+    weak var delegate: PhotosCollectionViewCellDelegate?
 
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
+
+        imageTapGesture()
     }
 
     required init?(coder: NSCoder) {
@@ -32,10 +43,7 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
 
         layout()
-    }
-
-    func setupCell(photo: ProfilePhotos) {
-        image.image = photo.image
+        imageTapGesture()
     }
 
     private func layout() {
@@ -47,5 +55,22 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
             image.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             image.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+    }
+
+    func setupCell(photo: ProfilePhotos) {
+        image.image = photo.image
+    }
+
+    func setIndexPath(_ indexPath: IndexPath) {
+        indexPathCell = indexPath
+    }
+
+    private func imageTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapImage))
+        self.image.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func tapImage() {
+        delegate?.imageTapped(image.image, frameImage: image.frame, indexPath: indexPathCell)
     }
 }

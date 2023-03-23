@@ -73,7 +73,6 @@ class PhotosTableViewCell: UITableViewCell {
         return image
     }()
     
-
     private let goOverImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false

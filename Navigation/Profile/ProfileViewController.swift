@@ -10,7 +10,7 @@ import UIKit
 final class ProfileViewController: UIViewController {
 
     // MARK: - Propertie's
-    private let profilePosts: [ProfilePosts] = ProfilePosts.createMockPofilePost()
+    private var profilePosts: [ProfilePosts] = ProfilePosts.createMockPofilePost()
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -65,6 +65,26 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
             cell.setupCell(post: profilePosts[indexPath.row])
+
+            cell.ppLikesView.addTapGestureRecognizer {
+                self.profilePosts[indexPath.row].likes += 1
+                cell.setupCell(post: self.profilePosts[indexPath.row])
+            }
+
+            cell.ppImageView.addTapGestureRecognizer {
+                self.profilePosts[indexPath.row].views += 1
+
+                let postVC = ProfilePostViewController()
+                postVC.setupCell(post: self.profilePosts[indexPath.row])
+                self.present(postVC, animated: true)
+
+                postVC.ppLikesView.addTapGestureRecognizer {
+                    self.profilePosts[indexPath.row].likes += 1
+                    postVC.setupCell(post: self.profilePosts[indexPath.row])
+                    cell.setupCell(post: self.profilePosts[indexPath.row])
+                }
+                cell.setupCell(post: self.profilePosts[indexPath.row])
+            }
             return cell
         }
     }
@@ -92,6 +112,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         guard indexPath == IndexPath(row: 0, section: 0) else { return }
         let photosVC = PhotosViewController()
         navigationController?.pushViewController(photosVC, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            profilePosts.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }
 
