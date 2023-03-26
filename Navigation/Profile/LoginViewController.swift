@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func accessIsAllowed(_ isDataCorrect: Bool)
+}
+
 final class LoginViewController: UIViewController {
     
     private let notification = NotificationCenter.default
+
+    weak var delegate: LoginViewControllerDelegate?
+
+    private var isDataCorrect = false
 
     // MARK: - Propertie's
     private let scrollView: UIScrollView = {
@@ -87,6 +95,7 @@ final class LoginViewController: UIViewController {
         button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -201,6 +210,13 @@ final class LoginViewController: UIViewController {
         ])
     }
 
+    private func validateAlert() {
+        let alert = UIAlertController(title: "Неправильный логин или пароль", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ок", style: .default) { _ in }
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+
     // MARK: - @objc
     @objc private func keybordWillShow(notification: NSNotification) {
         if let keybordSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -213,10 +229,18 @@ final class LoginViewController: UIViewController {
         scrollView.contentInset = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
     }
+
+    @objc private func buttonTapped() {
+        guard let text = loginField.text, !text.isEmpty && text.count > 5 else { return loginField.shakeField(field: loginField) }
+        guard let text = passwordField.text, !text.isEmpty && text.count > 5 else { return passwordField.shakeField(field: passwordField) }
+        guard loginField.text! == "login123@mail.com" && passwordField.text! == "login123" else { return validateAlert() }
+
+        isDataCorrect = true
+        delegate?.accessIsAllowed(isDataCorrect)
+    }
 }
 
 // MARK: - Extension's
-
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if loginField.text?.count ?? 0 < 5 && passwordField.text?.count ?? 0 < 5 {
