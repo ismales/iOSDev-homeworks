@@ -7,12 +7,20 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func accessIsAllowed(_ isDataCorrect: Bool)
+}
+
 final class LoginViewController: UIViewController {
     
     private let notification = NotificationCenter.default
 
+    weak var delegate: LoginViewControllerDelegate?
+
+    private var isDataCorrect = false
+
     // MARK: - Propertie's
-    let scrollView: UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
@@ -51,9 +59,9 @@ final class LoginViewController: UIViewController {
         return separator
     }()
     
-    private lazy var loginField: UITextField = {
+    lazy var loginField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Почта или номер телефона"
+        textField.placeholder = "Email"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
@@ -63,7 +71,7 @@ final class LoginViewController: UIViewController {
         return textField
     }()
     
-    private lazy var passwordField: UITextField = {
+    lazy var passwordField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Пароль"
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +82,7 @@ final class LoginViewController: UIViewController {
         textField.backgroundColor = .systemGray6
         textField.delegate = self
         textField.isSecureTextEntry = true
+        textField.clearsOnBeginEditing = false
         return textField
     }()
     
@@ -86,9 +95,32 @@ final class LoginViewController: UIViewController {
         button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
-    
+
+    private lazy var validLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Логин и пароль должны быть не менее 5 символов"
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .red
+        label.layer.opacity = 0.7
+        label.isHidden = true
+        return label
+    }()
+
+    private lazy var emailValidLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Некорректный email"
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .red
+        label.layer.opacity = 0.7
+        label.isHidden = true
+        return label
+    }()
+
     // MARK: - lifecicle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +150,8 @@ final class LoginViewController: UIViewController {
         contentView.addSubview(vkImage)
         contentView.addSubview(stackView)
         contentView.addSubview(loginButton)
+        contentView.addSubview(validLabel)
+        contentView.addSubview(emailValidLabel)
         
         stackView.addArrangedSubview(loginField)
         stackView.addArrangedSubview(separatorView)
@@ -166,10 +200,23 @@ final class LoginViewController: UIViewController {
             loginButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             loginButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+
+            validLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
+            validLabel.centerXAnchor.constraint(equalTo: loginButton.centerXAnchor),
+
+            emailValidLabel.topAnchor.constraint(equalTo: validLabel.bottomAnchor),
+            emailValidLabel.centerXAnchor.constraint(equalTo: loginButton.centerXAnchor),
+            emailValidLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-    
+
+    private func validateAlert() {
+        let alert = UIAlertController(title: "Неправильный логин или пароль", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ок", style: .default) { _ in }
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+
     // MARK: - @objc
     @objc private func keybordWillShow(notification: NSNotification) {
         if let keybordSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -182,11 +229,41 @@ final class LoginViewController: UIViewController {
         scrollView.contentInset = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
     }
+
+    @objc private func buttonTapped() {
+        guard let text = loginField.text, !text.isEmpty && text.count > 5 else { return loginField.shakeField(field: loginField) }
+        guard let text = passwordField.text, !text.isEmpty && text.count > 5 else { return passwordField.shakeField(field: passwordField) }
+        guard loginField.text! == "login123@mail.com" && passwordField.text! == "login123" else { return validateAlert() }
+
+        isDataCorrect = true
+        delegate?.accessIsAllowed(isDataCorrect)
+    }
 }
 
 // MARK: - Extension's
-
 extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if loginField.text?.count ?? 0 < 5 && passwordField.text?.count ?? 0 < 5 {
+            validLabel.isHidden = false
+            emailValidLabel.isHidden = false
+        }
+        return true
+    }
+
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if loginField.text?.isValid ?? false {
+            emailValidLabel.isHidden = true
+        } else {
+            emailValidLabel.isHidden = false
+        }
+
+        if loginField.text?.count ?? 0 >= 5 && passwordField.text?.count ?? 0 >= 5 {
+            validLabel.isHidden = true
+        } else {
+            validLabel.isHidden = false
+        }
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
     }

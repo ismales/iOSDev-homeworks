@@ -11,13 +11,16 @@ final class TabBarViewController: UITabBarController {
 
     private let feedVC = UINavigationController(rootViewController: FeedViewController())
     private let profileVC = UINavigationController(rootViewController: ProfileViewController())
-    private let loginVC = LoginViewController()
+    private lazy var loginVC: LoginViewController = {
+        let loginVC = LoginViewController()
+        loginVC.delegate = self
+        return loginVC
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupConrollers()
-        changeVC()
     }
 
     private func setupConrollers() {
@@ -35,11 +38,15 @@ final class TabBarViewController: UITabBarController {
         viewControllers = [feedVC, loginVC]
     }
 
-    private func changeVC() {
-        loginVC.loginButton.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
-    }
-
-    @objc private func buttonTap() {
+    func changeVC() {
         viewControllers = [feedVC, profileVC]
+    }
+}
+
+extension TabBarViewController: LoginViewControllerDelegate, UITabBarControllerDelegate {
+    func accessIsAllowed(_ isDataCorrect: Bool) {
+        if isDataCorrect {
+            changeVC()
+        }
     }
 }

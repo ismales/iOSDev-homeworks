@@ -12,10 +12,10 @@ class ProfileHeaderView: UIView {
     // MARK: - Propertie's
     private var statusText = ""
 
-    var topConstraint = NSLayoutConstraint()
-    var leadingConstraint = NSLayoutConstraint()
-    var widthConstraint = NSLayoutConstraint()
-    var heightConstraint = NSLayoutConstraint()
+    private var topConstraint = NSLayoutConstraint()
+    private var leadingConstraint = NSLayoutConstraint()
+    private var widthConstraint = NSLayoutConstraint()
+    private var heightConstraint = NSLayoutConstraint()
 
     private let headerContentView: UIView = {
         let view = UIView()
@@ -24,7 +24,7 @@ class ProfileHeaderView: UIView {
         return view
     }()
 
-     private let profileImage: UIImageView = {
+     private let avatar: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "profileImage.png")
@@ -37,7 +37,7 @@ class ProfileHeaderView: UIView {
         return image
     }()
 
-    private var profileUserName: UILabel = {
+    private var userNameLabel: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -46,7 +46,7 @@ class ProfileHeaderView: UIView {
         return name
     }()
 
-    private var profileUserStatus: UILabel = {
+    private var userStatusLabel: UILabel = {
         let status = UILabel()
         status.translatesAutoresizingMaskIntoConstraints = false
         status.font = UIFont.systemFont(ofSize: 14)
@@ -55,7 +55,7 @@ class ProfileHeaderView: UIView {
         return status
     }()
 
-    private lazy var profileNewStatusField: UITextField = {
+    private lazy var newStatusField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
@@ -69,13 +69,12 @@ class ProfileHeaderView: UIView {
         return textField
     }()
 
-    private var profileStatusChangeButton: UIButton = {
+    private var updateStatusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Установить статус", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
-
         button.backgroundColor = .blue
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -84,7 +83,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
 
-    let backgroindImageView: UIView = { // for animate
+    private let backgroindImageView: UIView = { // for animate
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         view.alpha = 0.0
         view.backgroundColor = .black
@@ -116,23 +115,23 @@ class ProfileHeaderView: UIView {
 
     // MARK: - Method's
     private func pressButton() {
-        profileStatusChangeButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        updateStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
 
     func imageTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
-        self.profileImage.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapImage))
+        self.avatar.addGestureRecognizer(tapGesture)
     }
 
     // MARK: - Layot
     private func layout() {
         addSubview(headerContentView)
-        [profileImage, profileUserName, profileUserStatus, profileNewStatusField, profileStatusChangeButton].forEach { headerContentView.addSubview($0) }
+        [avatar, userNameLabel, userStatusLabel, newStatusField, updateStatusButton].forEach { headerContentView.addSubview($0) }
 
-        topConstraint = profileImage.topAnchor.constraint(equalTo: headerContentView.topAnchor, constant: 16)
-        leadingConstraint = profileImage.leadingAnchor.constraint(equalTo: headerContentView.leadingAnchor, constant: 16)
-        heightConstraint = profileImage.heightAnchor.constraint(equalToConstant: 110)
-        widthConstraint = profileImage.widthAnchor.constraint(equalToConstant: 110)
+        topConstraint = avatar.topAnchor.constraint(equalTo: headerContentView.topAnchor, constant: 16)
+        leadingConstraint = avatar.leadingAnchor.constraint(equalTo: headerContentView.leadingAnchor, constant: 16)
+        heightConstraint = avatar.heightAnchor.constraint(equalToConstant: 110)
+        widthConstraint = avatar.widthAnchor.constraint(equalToConstant: 110)
 
         NSLayoutConstraint.activate([
             topConstraint, leadingConstraint, heightConstraint, widthConstraint,
@@ -142,44 +141,45 @@ class ProfileHeaderView: UIView {
             headerContentView.trailingAnchor.constraint(equalTo: trailingAnchor),
             headerContentView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            profileUserName.topAnchor.constraint(equalTo: headerContentView.topAnchor, constant: 27),
-            profileUserName.centerXAnchor.constraint(equalTo: headerContentView.centerXAnchor),
-            profileUserName.heightAnchor.constraint(equalToConstant: 18),
-            profileUserName.widthAnchor.constraint(equalToConstant: profileUserName.intrinsicContentSize.width),
+            userNameLabel.topAnchor.constraint(equalTo: headerContentView.topAnchor, constant: 27),
+            userNameLabel.centerXAnchor.constraint(equalTo: headerContentView.centerXAnchor, constant: -20),
+            userNameLabel.heightAnchor.constraint(equalToConstant: 18),
+            userNameLabel.widthAnchor.constraint(equalToConstant: userNameLabel.intrinsicContentSize.width),
 
-            profileUserStatus.topAnchor.constraint(equalTo: headerContentView.topAnchor, constant: 80),
-            profileUserStatus.centerXAnchor.constraint(equalTo: headerContentView.centerXAnchor),
-            profileUserStatus.heightAnchor.constraint(equalToConstant: 14),
+            userStatusLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 45),
+            userStatusLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
+            userStatusLabel.heightAnchor.constraint(equalToConstant: 14),
 
-            profileNewStatusField.topAnchor.constraint(equalTo: profileUserStatus.topAnchor, constant: 20),
-            profileNewStatusField.leadingAnchor.constraint(equalTo: profileUserStatus.leadingAnchor),
-            profileNewStatusField.heightAnchor.constraint(equalToConstant: 40),
-            profileNewStatusField.trailingAnchor.constraint(equalTo: headerContentView.trailingAnchor, constant: -16),
+            newStatusField.topAnchor.constraint(equalTo: userStatusLabel.bottomAnchor, constant: 10),
+            newStatusField.leadingAnchor.constraint(equalTo: userStatusLabel.leadingAnchor),
+            newStatusField.heightAnchor.constraint(equalToConstant: 40),
+            newStatusField.trailingAnchor.constraint(equalTo: headerContentView.trailingAnchor, constant: -16),
 
-            profileStatusChangeButton.topAnchor.constraint(equalTo: profileNewStatusField.bottomAnchor, constant: 20),
-            profileStatusChangeButton.leadingAnchor.constraint(equalTo: headerContentView.leadingAnchor, constant: 16),
-            profileStatusChangeButton.trailingAnchor.constraint(equalTo: headerContentView.trailingAnchor, constant: -16),
-            profileStatusChangeButton.bottomAnchor.constraint(equalTo: headerContentView.bottomAnchor, constant: -16),
-            profileStatusChangeButton.heightAnchor.constraint(equalToConstant: 50),
-            profileStatusChangeButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 32)
+            updateStatusButton.topAnchor.constraint(equalTo: newStatusField.bottomAnchor, constant: 20),
+            updateStatusButton.leadingAnchor.constraint(equalTo: headerContentView.leadingAnchor, constant: 16),
+            updateStatusButton.trailingAnchor.constraint(equalTo: headerContentView.trailingAnchor, constant: -16),
+            updateStatusButton.bottomAnchor.constraint(equalTo: headerContentView.bottomAnchor, constant: -16),
+            updateStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            updateStatusButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 32)
         ])
     }
 
     // MARK: - @objc
     @objc private func statusTextChanged(_ textField: UITextField) {
-        statusText = profileNewStatusField.text!
+        statusText = newStatusField.text!
     }
 
     @objc private func buttonPressed() {
-        profileUserStatus.text = statusText
-        profileNewStatusField.text = nil
+        guard let text = newStatusField.text, !text.isEmpty else { return newStatusField.shakeField(field: newStatusField) }
+        userStatusLabel.text = statusText
+        newStatusField.text = nil
     }
 
-    @objc func tap() {
+    @objc func tapImage() {
 
         headerContentView.addSubview(backgroindImageView)
         backgroindImageView.addSubview(closeButton)
-        headerContentView.addSubview(profileImage)
+        headerContentView.addSubview(avatar)
 
         UIView.animateKeyframes(withDuration: 0.8, delay: 0.0) {
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.62) {
@@ -188,7 +188,7 @@ class ProfileHeaderView: UIView {
                 self.topConstraint.constant = self.headerContentView.bounds.height / 2
                 self.widthConstraint.constant = self.backgroindImageView.bounds.width
                 self.heightConstraint.constant = self.backgroindImageView.bounds.width
-                self.profileImage.layer.cornerRadius = 0
+                self.avatar.layer.cornerRadius = 0
                 self.closeButton.alpha = 0.0
                 NSLayoutConstraint.activate([
                     self.closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -215,7 +215,7 @@ class ProfileHeaderView: UIView {
                 self.leadingConstraint.constant = 16
                 self.heightConstraint.constant = 110
                 self.widthConstraint.constant = 110
-                self.profileImage.layer.cornerRadius = 55
+                self.avatar.layer.cornerRadius = 55
                 self.layoutIfNeeded()
             }
         }

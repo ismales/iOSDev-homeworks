@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD15B0C629C87D1200B7EDB5 /* String +ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15B0C529C87D1200B7EDB5 /* String +ext.swift */; };
+		AD15B0C829C8B98700B7EDB5 /* Textfield +ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15B0C729C8B98600B7EDB5 /* Textfield +ext.swift */; };
+		AD15B0CB29C8E30500B7EDB5 /* ProfilePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15B0CA29C8E30400B7EDB5 /* ProfilePostViewController.swift */; };
 		AD3DAEBA299E243E00348808 /* ProfilePosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3DAEB9299E243D00348808 /* ProfilePosts.swift */; };
 		AD3DAEBC299E2A0000348808 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3DAEBB299E2A0000348808 /* PostTableViewCell.swift */; };
 		AD3DAEBE299E2A9900348808 /* UIView +ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3DAEBD299E2A9900348808 /* UIView +ext.swift */; };
@@ -28,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD15B0C529C87D1200B7EDB5 /* String +ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String +ext.swift"; sourceTree = "<group>"; };
+		AD15B0C729C8B98600B7EDB5 /* Textfield +ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Textfield +ext.swift"; sourceTree = "<group>"; };
+		AD15B0CA29C8E30400B7EDB5 /* ProfilePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostViewController.swift; sourceTree = "<group>"; };
 		AD3DAEB9299E243D00348808 /* ProfilePosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePosts.swift; sourceTree = "<group>"; };
 		AD3DAEBB299E2A0000348808 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		AD3DAEBD299E2A9900348808 /* UIView +ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView +ext.swift"; sourceTree = "<group>"; };
@@ -61,6 +67,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD15B0C929C8BCA700B7EDB5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AD3DAEB9299E243D00348808 /* ProfilePosts.swift */,
+				AD6B794A29A4B527008522FE /* ProfilePhotos.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		AD5341392993E08500443833 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +100,8 @@
 			children = (
 				AD53415F299BA9B400443833 /* Color +ext.swift */,
 				AD3DAEBD299E2A9900348808 /* UIView +ext.swift */,
+				AD15B0C529C87D1200B7EDB5 /* String +ext.swift */,
+				AD15B0C729C8B98600B7EDB5 /* Textfield +ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -107,10 +124,9 @@
 				AD5341372993990800443833 /* ProfileHeaderView.swift */,
 				AD6B794829A4B0D9008522FE /* PhotosTableViewCell.swift */,
 				AD3DAEBB299E2A0000348808 /* PostTableViewCell.swift */,
+				AD15B0CA29C8E30400B7EDB5 /* ProfilePostViewController.swift */,
 				AD6B795329A50491008522FE /* PhotosViewController.swift */,
 				AD6B795029A4D847008522FE /* PhotosCollectionViewCell.swift */,
-				AD3DAEB9299E243D00348808 /* ProfilePosts.swift */,
-				AD6B794A29A4B527008522FE /* ProfilePhotos.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -134,6 +150,7 @@
 		ADE7B8F0298A80490083EF7A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				AD15B0C929C8BCA700B7EDB5 /* Model */,
 				AD5341392993E08500443833 /* Application */,
 				AD6ABFA8298AC0BD003C89A9 /* Feed */,
 				AD6ABFA9298AC0D4003C89A9 /* Profile */,
@@ -224,9 +241,12 @@
 				AD3DAEBA299E243E00348808 /* ProfilePosts.swift in Sources */,
 				AD5341382993990800443833 /* ProfileHeaderView.swift in Sources */,
 				AD534160299BA9B400443833 /* Color +ext.swift in Sources */,
+				AD15B0C629C87D1200B7EDB5 /* String +ext.swift in Sources */,
+				AD15B0CB29C8E30500B7EDB5 /* ProfilePostViewController.swift in Sources */,
 				AD6B795129A4D847008522FE /* PhotosCollectionViewCell.swift in Sources */,
 				AD6B794929A4B0D9008522FE /* PhotosTableViewCell.swift in Sources */,
 				AD6ABFAB298B8210003C89A9 /* InfoViewController.swift in Sources */,
+				AD15B0C829C8B98700B7EDB5 /* Textfield +ext.swift in Sources */,
 				AD3DAEBE299E2A9900348808 /* UIView +ext.swift in Sources */,
 				ADE7B8F2298A80490083EF7A /* AppDelegate.swift in Sources */,
 			);

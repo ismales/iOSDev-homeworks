@@ -1,16 +1,16 @@
 //
-//  PostTableViewCell.swift
+//  ProfilePostViewController.swift
 //  Navigation
 //
-//  Created by Сманчос on 16.02.2023.
+//  Created by Сманчос on 20.03.2023.
 //
 
 import UIKit
 
-final class PostTableViewCell: UITableViewCell {
+class ProfilePostViewController: UIViewController {
 
     // MARK: - Propertie's
-    private let cellContentView: UIView = {
+    private var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +31,6 @@ final class PostTableViewCell: UITableViewCell {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
-        image.isUserInteractionEnabled = true
         return image
     }()
 
@@ -61,28 +60,15 @@ final class PostTableViewCell: UITableViewCell {
         return label
     }()
 
-    // MARK: - Init
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    // MARK: - Lifecicle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .lightGray
 
         layout()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     // MARK: - Method's
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        ppAuthorLabel.text = ""
-        ppImageView.image = nil
-        ppDescriptionLabel.text = ""
-        ppLikesView.text = ""
-        ppViews.text = ""
-    }
-
     func setupCell(post: ProfilePosts) {
         ppAuthorLabel.text = post.author
         ppImageView.image = post.image
@@ -92,40 +78,38 @@ final class PostTableViewCell: UITableViewCell {
     }
 
     private func layout() {
-        contentView.addSubview(cellContentView)
-        [ppAuthorLabel, ppImageView, ppDescriptionLabel, ppLikesView, ppViews].forEach { cellContentView.addSubview($0) }
+        view.addSubview(contentView)
+        [ppAuthorLabel, ppImageView, ppDescriptionLabel, ppLikesView, ppViews].forEach { contentView.addSubview($0) }
 
         let offset: CGFloat = 16
 
         NSLayoutConstraint.activate([
-            cellContentView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            cellContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            cellContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            cellContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            cellContentView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
-            ppAuthorLabel.topAnchor.constraint(equalTo: cellContentView.topAnchor, constant: offset),
-            ppAuthorLabel.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: offset),
-            ppAuthorLabel.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -offset),
-            ppAuthorLabel.bottomAnchor.constraint(equalTo: ppImageView.topAnchor, constant: -offset),
+            ppAuthorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: offset),
+            ppAuthorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: offset),
+            ppAuthorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -offset),
+            ppAuthorLabel.heightAnchor.constraint(equalToConstant: 60),
 
             ppImageView.topAnchor.constraint(equalTo: ppAuthorLabel.bottomAnchor),
-            ppImageView.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor),
-            ppImageView.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor),
+            ppImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             ppImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             ppImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
 
             ppDescriptionLabel.topAnchor.constraint(equalTo: ppImageView.bottomAnchor, constant: offset),
-            ppDescriptionLabel.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: offset),
-            ppDescriptionLabel.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -offset),
+            ppDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: offset),
+            ppDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -offset),
 
             ppLikesView.topAnchor.constraint(equalTo: ppDescriptionLabel.bottomAnchor, constant: offset),
-            ppLikesView.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: offset),
-            ppLikesView.bottomAnchor.constraint(equalTo: cellContentView.bottomAnchor, constant: -offset),
+            ppLikesView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: offset),
+            ppLikesView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -offset),
 
             ppViews.topAnchor.constraint(equalTo: ppDescriptionLabel.bottomAnchor, constant: offset),
-            ppViews.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -offset),
-            ppLikesView.bottomAnchor.constraint(equalTo: cellContentView.bottomAnchor, constant: -offset),
+            ppViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -offset),
+            ppLikesView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -offset),
         ])
     }
 }
